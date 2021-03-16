@@ -49,7 +49,7 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Mac & Cheese</h5>
-                <p class="card-text">Ingredients: Mac, Cheese</p>
+                <p class="card-text">Ingredients: Mac, Cheese, Butter, Milk</p>
                 <a href="#" class="btn btn-primary bg-radish">
                   <i class="fas fa-edit" aria-hidden="true"></i>
                 </a>
@@ -59,8 +59,8 @@
           <div class="col-4">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Mac & Cheese</h5>
-                <p class="card-text">Ingredients: Mac, Cheese</p>
+                <h5 class="card-title">Broccoli Stir-Fry</h5>
+                <p class="card-text">Ingredients: Broccoli, Olive oil, Soy sauce</p>
                 <a href="#" class="btn btn-primary bg-radish">
                   <i class="fas fa-edit" aria-hidden="true"></i>
                 </a>
@@ -70,8 +70,8 @@
           <div class="col-4">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Mac & Cheese</h5>
-                <p class="card-text">Ingredients: Mac, Cheese</p>
+                <h5 class="card-title">Mashed Potatoes</h5>
+                <p class="card-text">Ingredients: Potatoes, Butter, Milk</p>
                 <a href="#" class="btn btn-primary bg-radish">
                   <i class="fas fa-edit" aria-hidden="true"></i>
                 </a>
@@ -92,7 +92,7 @@
         <small class="copyright">&copy; 2021 Jennifer Long (rz5sc), Alex Shen (as5gd)</small>
       </footer>
 
-      <!-- Modal -->
+      <!-- Modal for creating new meals -->
       <div class="modal fade" id="mealCreateModal" tabindex="-1" aria-labelledby="mealCreateLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -103,7 +103,33 @@
               </button>
             </div>
             <div class="modal-body">
-              ...
+              <form>
+                <div class="form-group">
+                  <label for="RecipeTitle">Recipe Title</label>
+                  <input type="text" class="form-control" id="RecipeTitle" placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                  <label for="NumServings">Number of servings</label>
+                  <select class="form-control" id="NumServings">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="Ingredients">Ingredients</label>
+                  <textarea class="form-control" id="Ingredients" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="Recipe">Recipe</label>
+                  <textarea class="form-control" id="Recipe" rows="3"></textarea>
+                </div>
+                <small id="note" class="form-text text-muted">
+                  Note: This form is not currently functional (planning to add PHP + database).
+                </small>
+              </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
