@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+
+<table class="table" id="table">
+    <thead>
+    <th scope="col">Item</th>
+    <th scope="col">Quantity</th>
+    <th scope="col">Estimated Price/Unit</th>
+    <th scope="col">Estimated Price</th>
+    </thead>
+    <tbody>
+    <!--    <tr>-->
+    <!--        <td>Chicken</td>-->
+    <!--        <td>2</td>-->
+    <!--        <td>3</td>-->
+    <!--        <td>6</td>-->
+    <!--    </tr>-->
+    <tr id="inputs">
+        <td>
+            <input id="item" placeholder="Item">
+        </td>
+        <td>
+            <input id="quantity" placeholder="Quantity" onchange="updateItemPrice(this.id)">
+        </td>
+        <td>
+            <input id="estimated-ppu" placeholder="Estimated Cost/Unit" onchange="updateItemPrice(this.id)">
+        </td>
+        <td>
+            <input id="total-item-cost" disabled="true">
+        </td>
+        <!--            <button class="btn btn-primary" onclick="test()">Test</button>-->
+    </tr>
+    <tr id="total">
+        <td></td>
+        <td></td>
+        <td></td>
+        <!--        Define a custom CSS style for this!-->
+        <td style="display: flex"><b>Total Price</b>:&nbsp;<div id="total-cost"></div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div style="display:flex"><button class="btn btn-primary" onclick="addRow()">Add Item</button> <div id="invalid-input-alert"></div></div>
+
+</body>
+
+<script>
+    function addRow() {
+        // Convert the HTMLCollection to an array we can call map() on
+        const input_cells = Array.prototype.slice.call(document.getElementById('inputs').cells)
+        // Required anonymous function!
+        const inputs = input_cells.map(x => x.children[0].value)
+
+
+        // Test whether or not inputs are valid. This absolutely does not need to be an
+        // anonymous function, but it is because we're required to have at least one. :P
+        let validInput = (function () {
+            const name = inputs[0]
+            const quantity = Number(inputs[1])
+            const pricePerUnit = inputs[2]
+
+            // We need quantity to be an integer, and we only care that pricePerUnit is not NaN.
+            return name != "" && Number.isInteger(quantity) && !isNaN(pricePerUnit)
+        }())
+        if (validInput) {
+            let table = document.getElementById('table')
+
+            let nextRowNum = table.rows.length;
+            // Row IDs count up from 0 because we continuously insert new rows @ 1
+            // to keep the form row at the bottom. This isn't fantastic for getting
+            // an intuitive understanding, but the only thing we really care about is
+            // making sure everything in the same row has the same # as an ID.
+            let row = table.insertRow(table.rows.length - 2)
+            let itemCell = row.insertCell(0)
+            let quantityCell = row.insertCell(1)
+            let pricePerUnitCell = row.insertCell(2)
+            let totalPriceCell = row.insertCell(3)
+
+            // Set values of newly created row using inputs
+            // Inputs are all the first child of their cell
+            itemCell.innerText = inputs[0]
+            quantityCell.innerText = inputs[1]
+            pricePerUnitCell.innerText = inputs[2]
+            totalPriceCell.innerText = inputs[3]
+
+            // Set IDs so we can refer to them later
+            // There are 3 "rows" that exist before any items are added; this is to allow first item to have ID=1
+            let itemID = table.rows.length - 3
+            row.id = `item-${itemID}`
+            itemCell.id = `item-name-${itemID}`
+            quantityCell.id = `quantity-${itemID}`
+            pricePerUnitCell.id = `ppu-${itemID}`
+            totalPriceCell.id = `total-price-${itemID}`
+
+            // Reset input boxes
+            let input_cells = document.getElementById('inputs').cells
+            input_cells[0].children[0].value = ""
+            input_cells[1].children[0].value = ""
+            input_cells[2].children[0].value = ""
+            input_cells[3].children[0].value = ""
+
+            // Set total cost of all items
+            let totalCost = 0
+            for (let i = 1; i <= table.rows.length - 3; i++) { // need to -3 instead of -2 because we just inserted an empty row
+                totalCost += parseFloat(table.rows[i].cells[3].innerText)
+            }
+            document.getElementById('total-cost').innerText = totalCost.toString() // technically unnecessary but IDE complains
+
+            // Clear invalid input alert
+            document.getElementById('invalid-input-alert').innerHTML = ''
+        }
+        else{
+            document.getElementById('invalid-input-alert').innerHTML = '<h1 style="color:red">Invalid input! </h1>'
+        }
+    }
+
+    function updateItemPrice(id) {
+        // Don't use the ID now, but will use later when we add row-by-row edit feature
+        let price_element = document.getElementById('total-item-cost')
+        const quantity = parseInt(document.getElementById('quantity').value)
+        const ppu = parseFloat(document.getElementById('estimated-ppu').value)
+        price_element.value = quantity * ppu
+    }
+</script>
+</html>
