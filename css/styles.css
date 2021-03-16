@@ -40,12 +40,17 @@ footer {
 }
 
 /* For more x-margin on big screens */
-@media (min-width: 1000px) {
+@media (min-width: 1400px) {
   #content{
     padding-left: 10%;
     padding-right: 10%;
   }
 }
+
+/* Table styling */
+th {background: #EEE}
+tr:nth-child(even) {background: #EEE}
+tr:nth-child(odd) {background: #FFF}
 
 /*************COLOR CLASSES**************/
 /* Use these utility classes in HTML tag class styling  */
