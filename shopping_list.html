@@ -64,8 +64,8 @@
         // anonymous function, but it is because we're required to have at least one. :P
         let validInput = (function () {
             const name = inputs[0]
-            const quantity = Number(inputs[1])
-            const pricePerUnit = inputs[2]
+            const quantity = inputs[1] != "" ? Number(inputs[1]) : NaN
+            const pricePerUnit = inputs[2] != "" ? parseFloat(inputs[2]) : NaN
 
             // We need quantity to be an integer, and we only care that pricePerUnit is not NaN.
             return name != "" && Number.isInteger(quantity) && !isNaN(pricePerUnit)
