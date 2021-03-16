@@ -46,8 +46,8 @@
                 <thead>
                 <th scope="col">Item</th>
                 <th scope="col">Quantity</th>
-                <th scope="col">Estimated Price/Unit</th>
-                <th scope="col">Estimated Price</th>
+                <th scope="col">Estimated Price/Unit ($)</th>
+                <th scope="col">Estimated Price ($)</th>
                 </thead>
                 <tbody>
                 <tr id="inputs">
@@ -69,8 +69,9 @@
             <div style="display:flex">
                 <a class="display-4 text-radish" onclick="addRow()"><i class="fas fa-plus-circle"></i></a>
             </div>
-            <div id="invalid-input-alert">
-            </div>
+<!--            <div id="invalid-input-alert">-->
+                <h5 class="text-radish" id="invalid-input-alert"></h5>
+<!--            </div>-->
         </div>
     </div>
 </div>
@@ -89,17 +90,28 @@
         const inputs = input_cells.map(x => x.children[0].value)
 
 
-        // Test whether or not inputs are valid. This absolutely does not need to be an
-        // anonymous function, but it is because we're required to have at least one. :P
-        let validInput = (function () {
+        // Test whether or not inputs are valid (0 if valid). This absolutely does not need
+        // to be an anonymous function, but it is because we're required to have at least one. :P
+        let inputValidity = (function () {
+            let return_code = 0
             const name = inputs[0]
             const quantity = inputs[1] != "" ? Number(inputs[1]) : NaN
-            const pricePerUnit = inputs[2] != "" ? parseFloat(inputs[2]) : NaN
+            const pricePerUnit = inputs[2] !== "" ? parseFloat(inputs[2]) : NaN
 
+            if(name === ""){
+                return_code += 1
+            }
             // We need quantity to be an integer, and we only care that pricePerUnit is not NaN.
-            return name != "" && Number.isInteger(quantity) && !isNaN(pricePerUnit)
+            if(!Number.isInteger(quantity)){
+                return_code += 10
+            }
+            if(isNaN(pricePerUnit)){
+                return_code += 100
+            }
+            console.log(return_code)
+            return return_code
         }())
-        if (validInput) {
+        if (inputValidity == 0) {
             let table = document.getElementById('table')
 
             let nextRowNum = table.rows.length;
@@ -141,13 +153,26 @@
             for (let i = 1; i <= table.rows.length - 3; i++) { // need to -3 instead of -2 because we just inserted an empty row
                 totalCost += parseFloat(table.rows[i].cells[3].innerText)
             }
-            document.getElementById('total-cost').innerText = totalCost.toString() // technically unnecessary but IDE complains
+            document.getElementById('total-cost').innerText = `$${totalCost}`
 
             // Clear invalid input alert
             document.getElementById('invalid-input-alert').innerHTML = ''
             document.getElementById('invalid-input-alert').style.visibility = "hidden";
         } else {
-            document.getElementById('invalid-input-alert').innerHTML = '<h5 class="text-radish">Error adding item: Invalid input! </h5>'
+            // Fills error message based on validity code (basically bitwise logic)
+            let errorMessage = '<b>Error adding item:</b>'
+            if(inputValidity % 10 === 1){
+                errorMessage += '<br>Item name must not be empty'
+            }
+            inputValidity = Math.floor(inputValidity/10)
+            if(inputValidity % 10 === 1){
+                errorMessage += '<br>Item quantity must be an integer'
+            }
+            inputValidity = Math.floor(inputValidity/10)
+            if(inputValidity % 10 === 1){
+                errorMessage += '<br>Estimated price/unit must be a number'
+            }
+            document.getElementById('invalid-input-alert').innerHTML = errorMessage
             document.getElementById('invalid-input-alert').style.visibility = "visible";
         }
     }
