@@ -114,11 +114,7 @@
         if (inputValidity == 0) {
             let table = document.getElementById('table')
 
-            let nextRowNum = table.rows.length;
-            // Row IDs count up from 0 because we continuously insert new rows @ 1
-            // to keep the form row at the bottom. This isn't fantastic for getting
-            // an intuitive understanding, but the only thing we really care about is
-            // making sure everything in the same row has the same # as an ID.
+            // Create new row and fill it with cells
             let row = table.insertRow(table.rows.length - 2)
             let itemCell = row.insertCell(0)
             let quantityCell = row.insertCell(1)
@@ -141,21 +137,21 @@
             pricePerUnitCell.id = `ppu-${itemID}`
             totalPriceCell.id = `total-price-${itemID}`
 
-            // Reset input boxes
+            // Reset input boxes for next item
             let input_cells = document.getElementById('inputs').cells
             input_cells[0].children[0].value = ""
             input_cells[1].children[0].value = ""
             input_cells[2].children[0].value = ""
             input_cells[3].children[0].value = ""
 
-            // Set total cost of all items
+            // Set cell indicating total cost of all items
             let totalCost = 0
             for (let i = 1; i <= table.rows.length - 3; i++) { // need to -3 instead of -2 because we just inserted an empty row
                 totalCost += parseFloat(table.rows[i].cells[3].innerText)
             }
             document.getElementById('total-cost').innerText = `$${totalCost}`
 
-            // Clear invalid input alert
+            // Clear invalid input alert (if it was there before)
             document.getElementById('invalid-input-alert').innerHTML = ''
             document.getElementById('invalid-input-alert').style.visibility = "hidden";
         } else {
