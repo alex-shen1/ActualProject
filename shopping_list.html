@@ -1,95 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Meal Planning Web Application" />
-    <meta name="author" content="Jennifer Long, Alex Shen" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="Meal Planning Web Application"/>
+    <meta name="author" content="Jennifer Long, Alex Shen"/>
     <title>Fridgin'Cool - Shopping List</title>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css"/>
     <!-- Stylesheets (includes Bootstrap)-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet"/>
 
     <style>
     </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Fridgin'Cool</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" href="#">Dashboard <span class="sr-only">(current)</span></a>
-        <a class="nav-link" href="./meals.html">Meals</a>
-        <a class="nav-link" href="./shopping_list.html">Shopping List</a>
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Planner (TBD)</a>
-      </div>
+        <div class="navbar-nav">
+            <a class="nav-link" href="./index.html">Dashboard <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="./meals.html">Meals</a>
+            <a class="nav-link  active" href="./shopping_list.html">Shopping List</a>
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Planner (TBD)</a>
+        </div>
     </div>
-  </nav>
+</nav>
 
-  <div id="content" class="container py-5">
+<div id="content" class="container py-5">
     <h2 id="pageHeader">My Shopping List</h2>
     <div class="row py-4">
-      <div class="col bg-white m-3 py-4">
-        <table class="table" id="table">
-          <thead>
-          <th scope="col">Item</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Estimated Price/Unit</th>
-          <th scope="col">Estimated Price</th>
-          </thead>
-          <tbody>
-          <!--    <tr>-->
-          <!--        <td>Chicken</td>-->
-          <!--        <td>2</td>-->
-          <!--        <td>3</td>-->
-          <!--        <td>6</td>-->
-          <!--    </tr>-->
-          <tr id="inputs">
-              <td>
-                  <input id="item" placeholder="Item">
-              </td>
-              <td>
-                  <input id="quantity" placeholder="Quantity" onchange="updateItemPrice(this.id)">
-              </td>
-              <td>
-                  <input id="estimated-ppu" placeholder="Estimated Cost/Unit" onchange="updateItemPrice(this.id)">
-              </td>
-              <td>
-                  <input id="total-item-cost" disabled="true">
-              </td>
-              <!--            <button class="btn btn-primary" onclick="test()">Test</button>-->
-          </tr>
-          <tr id="total">
-              <td></td>
-              <td></td>
-              <td></td>
-              <!--        Define a custom CSS style for this!-->
-              <td style="display: flex"><b>Total Price</b>:&nbsp;<div id="total-cost"></div>
-              </td>
-          </tr>
-          </tbody>
-        </table>
-        <div style="display:flex">
-          <a class="display-4 text-radish" onclick="addRow()"><i class="fas fa-plus-circle"></i></a>
+        <div class="col bg-white m-3 py-4">
+            <table class="table" id="table">
+                <thead>
+                <th scope="col">Item</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Estimated Price/Unit</th>
+                <th scope="col">Estimated Price</th>
+                </thead>
+                <tbody>
+                <tr id="inputs">
+                    <td><input id="item" placeholder="Item"></td>
+                    <td><input id="quantity" placeholder="Quantity" onchange="updateItemPrice(this.id)"></td>
+                    <td><input id="estimated-ppu" placeholder="Estimated Cost/Unit" onchange="updateItemPrice(this.id)"></td>
+                    <td><input id="total-item-cost" disabled="true"></td>
+                </tr>
+                <tr id="total">
+                    <!--empty cells  for proper spacing-->
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="display: flex"><b>Total Price</b>:&nbsp;<div id="total-cost"></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="display:flex">
+                <a class="display-4 text-radish" onclick="addRow()"><i class="fas fa-plus-circle"></i></a>
+            </div>
+            <div id="invalid-input-alert">
+            </div>
         </div>
-        <div id="invalid-input-alert">
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <footer class="primary-footer bg-dark text-white">
+<footer class="primary-footer bg-dark text-white">
     <small class="copyright">&copy; 2021 Jennifer Long (rz5sc), Alex Shen (as5gd)</small>
-  </footer>
+</footer>
 
 </body>
 
@@ -158,8 +146,7 @@
             // Clear invalid input alert
             document.getElementById('invalid-input-alert').innerHTML = ''
             document.getElementById('invalid-input-alert').style.visibility = "hidden";
-        }
-        else{
+        } else {
             document.getElementById('invalid-input-alert').innerHTML = '<h5 class="text-radish">Error adding item: Invalid input! </h5>'
             document.getElementById('invalid-input-alert').style.visibility = "visible";
         }
