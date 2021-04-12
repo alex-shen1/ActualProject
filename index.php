@@ -27,9 +27,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link active" href="./index.html">Dashboard <span class="sr-only">(current)</span></a>
-            <a class="nav-link" href="./meals.html">Meals</a>
-            <a class="nav-link" href="./shopping_list.html">Shopping List</a>
+            <a class="nav-link active" href="index.php">Dashboard <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="meals.php">Meals</a>
+            <a class="nav-link" href="shopping-list.php">Shopping List</a>
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Planner (TBD)</a>
           </div>
         </div>
@@ -59,13 +59,13 @@
             </div>
           </div>
           <div class="col-8">
-            <a href="./meals.html" class="btn btn-info btn-lg btn-block bg-coral">
+            <a href="meals.php" class="btn btn-info btn-lg btn-block bg-coral">
               My meals
             </a>
             <button type="button" class="btn btn-danger btn-lg btn-block bg-radish">
               Plan meals
             </button>
-            <a href="shopping_list.html" class="btn btn-secondary btn-lg btn-block">
+            <a href="shopping-list.php" class="btn btn-secondary btn-lg btn-block">
               View Shopping List
             </a>
           </div>

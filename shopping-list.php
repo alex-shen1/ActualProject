@@ -30,9 +30,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-link" href="./index.html">Dashboard <span class="sr-only">(current)</span></a>
-            <a class="nav-link" href="./meals.html">Meals</a>
-            <a class="nav-link  active" href="./shopping_list.html">Shopping List</a>
+            <a class="nav-link" href="index.php">Dashboard <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="meals.php">Meals</a>
+            <a class="nav-link  active" href="shopping-list.php">Shopping List</a>
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Planner (TBD)</a>
         </div>
     </div>
