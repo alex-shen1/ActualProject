@@ -14,7 +14,7 @@
 //        Thus, specify the correct database name
 
 // hostname
-$hostname = '34.86.136.37:3306';
+$hostname = 'localhost:3306';
 
 // database name
 $dbname = 'web4640';
@@ -31,12 +31,7 @@ $socketDir = getenv('DB_SOCKET_DIR') ?: '/cloudsql';
 // as PHP, use the localhost keyword to specify the host computer
 
 //$dsn = "mysql:host=$hostname;dbname=$dbname";
-$dsn = sprintf(
-    'mysql:dbname=%s;unix_socket=%s/%s',
-    $dbname,
-    $socketDir,
-    $connectionName
-);
+$dsn = sprintf('mysql:dbname=%s;unix_socket=%s/%s',$dbname,$socketDir,$connectionName);
 
 // To connect to a MySQL database named web4640, need three arguments:
 // - specify a DSN, username, and password

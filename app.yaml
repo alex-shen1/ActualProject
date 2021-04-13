@@ -1,3 +1,8 @@
 runtime: php73
 
 entrypoint: serve front-controller.php
+
+handlers:
+
+  - url: /css
+    static_dir: css
