@@ -85,7 +85,7 @@ body {
   padding: 1rem;
 }
 
-.masthead .masthead-content .input-group-newsletter a {
+.masthead .masthead-content .input-group-newsletter #loginButton {
   font-size: 1.2rem;
   font-weight: 700;
   text-transform: uppercase;

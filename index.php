@@ -61,14 +61,14 @@
                        placeholder="Password" autofocus required
                        aria-label="Password" aria-describedby="addon-wrapping">
               </div>
-
               <div class="input-group input-group-newsletter">
-                <a class="btn btn-block btn-secondary" type="submit"
-                        href="dashboard.php">
-                  Login
-                  <i class="fa fa-sign-in-alt"></i>
-                </a>
+                <input id="loginButton" type="submit" value="Login"
+                       class="btn btn-block btn-secondary"/>
               </div>
+
+              <?php
+              authenticate();
+              ?>
 
             </form>
 
@@ -96,6 +96,33 @@
   crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
 
+
+  <?php
+  function authenticate()
+  {
+      // Valid credentials are password"
+      // Hash generated with: echo password_hash('password',PASSWORD_BCRYPT);
+      $hash = '$2y$10$yLagqKxgUQlIk71elu8TWOyCTAEe.iFtOn/GkCPCMPCB9D1HjkeTq';
+
+      if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['email']) && isset($_POST['password'])) {
+          // Check if field exists before access
+          $email = htmlspecialchars($_POST['email']);
+          $password = htmlspecialchars($_POST['password']);
+          if (password_verify($password, $hash)) {
+              // Set session variables
+              $_SESSION['email'] = $_POST['email'];
+              $_SESSION['pwd'] = $_POST['password'];
+              header('Location: dashboard.php');
+          } else {
+              echo '
+          <div class="my-5 w-100">
+          <div class="alert alert-danger" role="alert">Email or password does not match our record.</div>
+          </div>';
+          }
+      }
+
+  }
+  ?>
 
 </body>
 
