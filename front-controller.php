@@ -1,3 +1,4 @@
+<!-- Note: This is neccessary for GCP -->
 <?php
 //echo @parse_url($_SERVER['REQUEST_URI'])['path'];
 switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
@@ -7,8 +8,11 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/index.php':     // if you plan to also allow a URL with the file name
         require './index.php';
         break;
-    case '/login.php':
-        require './login.php';
+    case '/logout.php':
+        require './logout.php';
+        break;
+    case '/dashboard.php':
+        require './dashboard.php';
         break;
     case '/meals.php':
         require './meals.php';

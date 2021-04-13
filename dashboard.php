@@ -20,6 +20,7 @@
         </style>
     </head>
     <body>
+      <?php require 'login-session.php';?>
 
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Fridgin'Cool</a>

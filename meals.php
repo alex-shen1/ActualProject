@@ -22,93 +22,93 @@
 </head>
 
 <body>
+  <?php require 'login-session.php';?>
 
-<?php
-require('connect-db.php');  // connect to DB
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['id_to_delete'])) {
-        global $db;
-        echo "TO DELETE: " . $_POST['id_to_delete'];
-        $query = "DELETE FROM meals
-            WHERE id = :id";
-        $statement = $db -> prepare($query);
-        $statement -> bindValue(':id', $_POST['id_to_delete']);
-        $statement -> execute();
+  <?php
+  require('connect-db.php');  // connect to DB
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      if (isset($_POST['id_to_delete'])) {
+          global $db;
+          echo "TO DELETE: " . $_POST['id_to_delete'];
+          $query = "DELETE FROM meals
+              WHERE id = :id";
+          $statement = $db -> prepare($query);
+          $statement -> bindValue(':id', $_POST['id_to_delete']);
+          $statement -> execute();
 
-        $results = $statement -> fetchAll();
+          $results = $statement -> fetchAll();
 
-        $statement -> closeCursor();
-    }
-    echo "TITLE: " . $_POST['meal_title'];
-    echo "<br>";
-    if ($_POST['meal_title'] == '') {
-        echo "MEAL TITLE EMPTY <br>";
-    } elseif ($_POST['ingredients'] == '') {
-        echo "INGREDIENTS EMPTY";
-    } else {
-        $meal_title = $_POST['meal_title'];
-        $num_servings = $_POST['num_servings'];
-        $ingredients = $_POST['ingredients'];
-        $instructions = $_POST['instructions'];
-//        $ingredients = str_replace("\n", "<br>", $_POST['ingredients']);
-//        $instructions = str_replace("\n", "<br>", $_POST['instructions']);
-        insertMeal($meal_title, $num_servings, $ingredients, $instructions);
-    }
+          $statement -> closeCursor();
+      }
+      echo "TITLE: " . $_POST['meal_title'];
+      echo "<br>";
+      if ($_POST['meal_title'] == '') {
+          echo "MEAL TITLE EMPTY <br>";
+      } elseif ($_POST['ingredients'] == '') {
+          echo "INGREDIENTS EMPTY";
+      } else {
+          $meal_title = $_POST['meal_title'];
+          $num_servings = $_POST['num_servings'];
+          $ingredients = $_POST['ingredients'];
+          $instructions = $_POST['instructions'];
+  //        $ingredients = str_replace("\n", "<br>", $_POST['ingredients']);
+  //        $instructions = str_replace("\n", "<br>", $_POST['instructions']);
+          insertMeal($meal_title, $num_servings, $ingredients, $instructions);
+      }
 
-    echo str_replace("\n", "<br>", $_POST['instructions']);
-}
+      echo str_replace("\n", "<br>", $_POST['instructions']);
+  }
 
-function insertMeal(string $meal_title, int $num_servings, string $ingredients, string $instructions)
-{
-    global $db;
+  function insertMeal(string $meal_title, int $num_servings, string $ingredients, string $instructions)
+  {
+      global $db;
 
-    $query = "INSERT INTO meals
-VALUES (:title, :num_servings, :ingredients, :instructions, :user_email, uuid())";
+      $query = "INSERT INTO meals
+  VALUES (:title, :num_servings, :ingredients, :instructions, :user_email, uuid())";
 
-    $statement = $db->prepare($query);
-    $statement->bindValue(':title', $meal_title);
-    $statement->bindValue(':num_servings', $num_servings);
-    $statement->bindValue(':ingredients', $ingredients);
-    $statement->bindValue(':instructions', $instructions);
-    $statement->bindValue(':user_email', 'root@test.com');
-    $statement->execute();
+      $statement = $db->prepare($query);
+      $statement->bindValue(':title', $meal_title);
+      $statement->bindValue(':num_servings', $num_servings);
+      $statement->bindValue(':ingredients', $ingredients);
+      $statement->bindValue(':instructions', $instructions);
+      $statement->bindValue(':user_email', 'root@test.com');
+      $statement->execute();
 
-    $statement->closeCursor();
-}
+      $statement->closeCursor();
+  }
 
-function getMeals()
-{
-    global $db; // Name needs to match connect-db.php
-    $query = "SELECT * FROM meals";
-    $statement = $db->prepare($query);
-    $statement->execute();
+  function getMeals()
+  {
+      global $db; // Name needs to match connect-db.php
+      $query = "SELECT * FROM meals";
+      $statement = $db->prepare($query);
+      $statement->execute();
 
-    $results = $statement->fetchAll();
+      $results = $statement->fetchAll();
 
-    $statement->closeCursor();
+      $statement->closeCursor();
 
-    echo "TYPE OF \$RESULTS: " . gettype($results);
+      echo "TYPE OF \$RESULTS: " . gettype($results);
 
-    foreach ($results as $result) {
-        echo '<div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">' . $result['title'] . '</h5>
-                    <p class="card-text">Ingredients: ' . $result['ingredients'] . '</p>
-                    <form method="POST" action="meals.php">
-                    <input type="hidden" name="id_to_delete" value="' . $result['id'] . '" />
-                    <button type="submit" class="btn btn-primary bg-radish">
-                        <i class="fas fa-trash" aria-hidden="true"></i>
-                    </button>
-                    </form>
-                </div>
-            </div>
-        </div>';
+      foreach ($results as $result) {
+          echo '<div class="col-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">' . $result['title'] . '</h5>
+                      <p class="card-text">Ingredients: ' . $result['ingredients'] . '</p>
+                      <form method="POST" action="meals.php">
+                      <input type="hidden" name="id_to_delete" value="' . $result['id'] . '" />
+                      <button type="submit" class="btn btn-primary bg-radish">
+                          <i class="fas fa-trash" aria-hidden="true"></i>
+                      </button>
+                      </form>
+                  </div>
+              </div>
+          </div>';
 
-//        editMeal($result['title'],$result['num_servings'], $result['ingredients'], $result['instructions'], $result['id']);
-    }
-}
-
+  //        editMeal($result['title'],$result['num_servings'], $result['ingredients'], $result['instructions'], $result['id']);
+      }
+  }
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
