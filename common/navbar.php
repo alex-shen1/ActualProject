@@ -18,7 +18,7 @@
           Settings
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item disabled" href="#">My Account (TBD)</a>
+          <a class="dropdown-item" href="my-account.php">My Account</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="logout.php">Logout</a>
         </div>
