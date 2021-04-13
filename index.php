@@ -38,7 +38,7 @@
           <div class="masthead-content text-white py-5 py-md-0">
             <h1 class="mb-3">Fridgin'Cool: Your Daily Meal Planner</h1>
             <h5>Alex Shen (as5gd) and Jennifer Long (rz5sc)</h5>
-            <p class="mb-5">Login to access your meals and recipes: </p>
+            <p class="mb-5">Login to access your meal planner and recipes</p>
 
             <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
 

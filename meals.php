@@ -17,15 +17,6 @@
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="css/styles.css" rel="stylesheet"/>
 
-    <!-- Bootstrap Scripts -->
-    <script
-            src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
-            integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
-            crossorigin="anonymous"></script>
-
     <style>
     </style>
 </head>
@@ -282,7 +273,12 @@ function getMeals()
 //editMeal('', 1, '', '', '');
 ?>
 
-</body>
+<!-- Bootstrap core JavaScript -->
+<script
+src="https://code.jquery.com/jquery-3.6.0.js"
+integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
 
 <script>
     // Initialize tooltips
@@ -295,5 +291,7 @@ function getMeals()
         $('#myInput').trigger('focus')
     })
 </script>
+
+</body>
 
 </html>
