@@ -39,14 +39,6 @@ footer {
   html{ font-size: 14px; }
 }
 
-/* For more x-margin on big screens */
-@media (min-width: 1400px) {
-  #content{
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-}
-
 /* Table styling */
 th {background: #EEE}
 tr:nth-child(even) {background: #EEE}

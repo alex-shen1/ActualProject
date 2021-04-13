@@ -1,28 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content="Meal Planning Web Application"/>
-    <meta name="author" content="Jennifer Long, Alex Shen"/>
-    <title>Fridgin'Cool - My Meals</title>
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
-          type="text/css"/>
-    <!-- Stylesheets (includes Bootstrap)-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link href="css/styles.css" rel="stylesheet"/>
-
-    <style>
-    </style>
+  <?php include 'common/head-content.php';?>
+  <style></style>
 </head>
 
 <body>
-  <?php require 'login-session.php';?>
+  <?php require 'common/login-session.php';?>
 
   <?php
   require('connect-db.php');  // connect to DB
@@ -111,21 +95,7 @@
   }
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Fridgin'Cool</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-link" href="index.php">Dashboard <span class="sr-only">(current)</span></a>
-            <a class="nav-link active" href="meals.php">Meals</a>
-            <a class="nav-link" href="shopping-list.php">Shopping List</a>
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Planner (TBD)</a>
-        </div>
-    </div>
-</nav>
+<?php include 'common/navbar.php';?>
 
 <div id="content" class="container py-5">
     <h2 id="pageHeader">My Meals</h2>
@@ -216,9 +186,7 @@
     </div>
 </div>
 
-<footer class="primary-footer bg-dark text-white">
-    <small class="copyright">&copy; 2021 Jennifer Long (rz5sc), Alex Shen (as5gd)</small>
-</footer>
+<?php include 'common/footer.php';?>
 
 <!--SCRAPPED CODE-->
 <?php

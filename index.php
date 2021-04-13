@@ -2,25 +2,14 @@
 <html lang="en">
 
 <head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Meal Planning Web Application" />
-  <meta name="author" content="Jennifer Long, Alex Shen" />
-  <title>Fridgin'Cool - Daily Meal Planner</title>
-
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <?php include 'common/head-content.php';?>
 
   <!-- Custom fonts for this template -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <!-- Font Awesome icons (free version)-->
-  <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
 
   <!-- Custom styles for this template -->
   <link href="css/landing.css" rel="stylesheet">
-
 </head>
 
 
@@ -72,7 +61,8 @@
                        <?php if (isset($_POST['attempt']) && $_POST['attempt'] >= 3) echo 'disabled' ?>/>
               </div>
 
-              <?php if (isset($_POST['attempt'])) echo $_POST['attempt']; else echo "Not set" ?>
+              <?php echo "Login attempts:" ?>
+              <?php if (isset($_POST['attempt'])) echo $_POST['attempt']; else echo "0" ?>
               <?php authenticate(); ?>
 
             </form>
