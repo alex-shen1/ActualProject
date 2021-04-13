@@ -40,7 +40,7 @@
             <h5>Alex Shen (as5gd) and Jennifer Long (rz5sc)</h5>
             <p class="mb-5">Login to access your meals and recipes: </p>
 
-            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
 
               <div class="input-group input-group-newsletter">
                 <div class="input-group-prepend">
@@ -61,17 +61,21 @@
                        placeholder="Password" autofocus required
                        aria-label="Password" aria-describedby="addon-wrapping">
               </div>
+
+              <!-- Number of login attempts so far (hidden) -->
+              <input type="hidden" name="attempt"
+                     value="<?php if (isset($_POST['attempt'])) echo $_POST['attempt'] + 1; else echo 1 ?>">
+              <!-- Login button disabled on third failed attempt -->
               <div class="input-group input-group-newsletter">
                 <input id="loginButton" type="submit" value="Login"
-                       class="btn btn-block btn-secondary"/>
+                       class="btn btn-block btn-secondary"
+                       <?php if (isset($_POST['attempt']) && $_POST['attempt'] >= 3) echo 'disabled' ?>/>
               </div>
 
-              <?php
-              authenticate();
-              ?>
+              <?php if (isset($_POST['attempt'])) echo $_POST['attempt']; else echo "Not set" ?>
+              <?php authenticate(); ?>
 
             </form>
-
 
           </div>
         </div>
@@ -100,11 +104,11 @@
   <?php
   function authenticate()
   {
-      // Valid credentials are password"
+      // Valid credentials are any username with password "password"
       // Hash generated with: echo password_hash('password',PASSWORD_BCRYPT);
       $hash = '$2y$10$yLagqKxgUQlIk71elu8TWOyCTAEe.iFtOn/GkCPCMPCB9D1HjkeTq';
 
-      if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['email']) && isset($_POST['password'])) {
+      if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['email'], $_POST['password'])) {
           // Check if field exists before access
           $email = htmlspecialchars($_POST['email']);
           $password = htmlspecialchars($_POST['password']);
@@ -113,7 +117,18 @@
               $_SESSION['email'] = $_POST['email'];
               $_SESSION['pwd'] = $_POST['password'];
               header('Location: dashboard.php');
-          } else {
+          }
+          // Disable login on 3 failed attempts
+          else if (isset($_POST['attempt']) && $_POST['attempt'] >= 3) {
+              echo '
+          <div class="my-5 w-100">
+              <div class="alert alert-danger" role="alert">
+              You have attempted to login 3 times unsuccessfully. We have locked your ability to log in.
+              </div>
+          </div>';
+          }
+          // Display message if password does not match
+          else {
               echo '
           <div class="my-5 w-100">
           <div class="alert alert-danger" role="alert">Email or password does not match our record.</div>
