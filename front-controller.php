@@ -16,6 +16,9 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/shopping-list.php':
         require './shopping-list.php';
         break;
+    case '/db-test':
+        require './db-exercise.php';
+        break;
     default:
         http_response_code(404);
         exit('Not Found');
