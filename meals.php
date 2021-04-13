@@ -98,9 +98,46 @@
 <?php include 'common/navbar.php';?>
 
 <div id="content" class="container py-5">
-    <h2 id="pageHeader">My Meals</h2>
     <div class="row py-4">
-        <?php getMeals(); ?>
+      <div class="col d-flex justify-content-between">
+        <h2 id="pageHeader">My Meals</h2>
+        <form method="GET" action="./meals.php">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Filter by</label>
+              </div>
+              <select class="form-control" id="filterOptions" name="filteroptions">
+                  <option value = "all"
+                    <?php if (isset($_GET['filteroptions']) && $_GET['filteroptions'] == "all") echo "selected"; ?>
+                    >All</option>
+                  <option value = "breakfast"
+                    <?php if (isset($_GET['filteroptions']) && $_GET['filteroptions'] == "breakfast") echo "selected"; ?>
+                    >Breakfast</option>
+                  <option value = "lunch"
+                    <?php if (isset($_GET['filteroptions']) && $_GET['filteroptions'] == "lunch") echo "selected"; ?>
+                    >Lunch</option>
+                  <option value = "dinner"
+                  <?php if (isset($_GET['filteroptions']) && $_GET['filteroptions'] == "dinner") echo "selected"; ?>
+                    >Dinner</option>
+                  <option value = "snack"
+                    <?php if (isset($_GET['filteroptions']) && $_GET['filteroptions'] == "snack") echo "selected"; ?>
+                    >Snack</option>
+              </select>
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-success">Go</button>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+
+    <?php echo "Filtering by" ?>
+    <span class="font-weight-bold">
+      <?php if (isset($_GET['filteroptions'])) echo $_GET['filteroptions']; else echo "all" ?>
+    </span>
+
+    <div class="row py-4">
+                <?php getMeals(); ?>
         <!--        <div class="col-4">-->
         <!--            <div class="card">-->
         <!--                <div class="card-body">-->
