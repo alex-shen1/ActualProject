@@ -1,83 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Meal Planning Web Application" />
-        <meta name="author" content="Jennifer Long, Alex Shen" />
-        <title>Fridgin'Cool</title>
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <!-- Stylesheets (includes Bootstrap)-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <link href="css/styles.css" rel="stylesheet" />
 
-        <style>
-        </style>
-    </head>
-    <body>
+<head>
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Fridgin'Cool</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link active" href="index.php">Dashboard <span class="sr-only">(current)</span></a>
-            <a class="nav-link" href="meals.php">Meals</a>
-            <a class="nav-link" href="shopping-list.php">Shopping List</a>
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Planner (TBD)</a>
-          </div>
-        </div>
-      </nav>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Meal Planning Web Application" />
+  <meta name="author" content="Jennifer Long, Alex Shen" />
+  <title>Fridgin'Cool - Daily Meal Planner</title>
 
-      <div id="content" class="container py-5">
-        <h2 id="pageHeader">My Dashboard</h2>
-        <div class="row py-4">
-          <div class="col-4">
-            <div class="card">
-              <div class="card-header">
-                Today's Meals
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing.css" rel="stylesheet">
+
+</head>
+
+
+<body>
+  <!-- Built-in PHP session manager: https://www.php.net/manual/en/function.session-start.php -->
+  <?php session_start(); ?>
+
+  <div class="overlay"></div>
+
+  <div class="masthead">
+    <div class="masthead-bg"></div>
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-12 my-auto">
+          <div class="masthead-content text-white py-5 py-md-0">
+            <h1 class="mb-3">Fridgin'Cool: Your Daily Meal Planner</h1>
+            <h5>Alex Shen (as5gd) and Jennifer Long (rz5sc)</h5>
+            <p class="mb-5">Login to access your meals and recipes: </p>
+
+            <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+
+              <div class="input-group input-group-newsletter">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="addon-wrapping">@</span>
+                </div>
+                <input type="email" name="email" class="form-control"
+                       placeholder="Email address" autofocus required
+                       aria-label="Email" aria-describedby="addon-wrapping">
               </div>
-              <div class="card-body">
-                <h5 class="card-title">Breakfast</h5>
-                <p class="card-text">Mac & Cheese</p>
-                <h5 class="card-title">Lunch</h5>
-                <p class="card-text">Mac & Cheese</p>
-                <h5 class="card-title">Snack</h5>
-                <p class="card-text">Mac & Cheese</p>
-                <h5 class="card-title">Dinner</h5>
-                <p class="card-text">Mac & Cheese</p>
-                <a href="#" class="btn btn-primary bg-radish">
-                  <i class="fas fa-edit" aria-hidden="true"></i> Edit meals
-                </a>
+
+              <div class="input-group input-group-newsletter">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="addon-wrapping">
+                    <i class="fa fa-lock"></i>
+                  </span>
+                </div>
+                <input type="password" name="password" class="form-control"
+                       placeholder="Password" autofocus required
+                       aria-label="Password" aria-describedby="addon-wrapping">
               </div>
-            </div>
-          </div>
-          <div class="col-8">
-            <a href="meals.php" class="btn btn-info btn-lg btn-block bg-coral">
-              My meals
-            </a>
-            <button type="button" class="btn btn-danger btn-lg btn-block bg-radish">
-              Plan meals
-            </button>
-            <a href="shopping-list.php" class="btn btn-secondary btn-lg btn-block">
-              View Shopping List
-            </a>
+              <div class="input-group input-group-newsletter">
+                <input id="loginButton" type="submit" value="Login"
+                       class="btn btn-block btn-secondary"/>
+              </div>
+
+              <?php
+              authenticate();
+              ?>
+
+            </form>
+
+
           </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <footer class="primary-footer bg-dark text-white">
-        <small class="copyright">&copy; 2021 Jennifer Long (rz5sc), Alex Shen (as5gd)</small>
-      </footer>
+  <div class="social-icons">
+    <ul class="list-unstyled text-center mb-0">
+      <li class="list-unstyled-item">
+        <a href="https://github.com/alex-shen1/FridginCool">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
 
-    </body>
+  <!-- Bootstrap core JavaScript -->
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
 
-    <!-- Bootstrap Scripts -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+
+  <?php
+  function authenticate()
+  {
+      // Valid credentials are password"
+      // Hash generated with: echo password_hash('password',PASSWORD_BCRYPT);
+      $hash = '$2y$10$yLagqKxgUQlIk71elu8TWOyCTAEe.iFtOn/GkCPCMPCB9D1HjkeTq';
+
+      if ($_SERVER['REQUEST_METHOD']=='POST' && isset($_POST['email']) && isset($_POST['password'])) {
+          // Check if field exists before access
+          $email = htmlspecialchars($_POST['email']);
+          $password = htmlspecialchars($_POST['password']);
+          if (password_verify($password, $hash)) {
+              // Set session variables
+              $_SESSION['email'] = $_POST['email'];
+              $_SESSION['pwd'] = $_POST['password'];
+              header('Location: dashboard.php');
+          } else {
+              echo '
+          <div class="my-5 w-100">
+          <div class="alert alert-danger" role="alert">Email or password does not match our record.</div>
+          </div>';
+          }
+      }
+
+  }
+  ?>
+
+</body>
+
 </html>
