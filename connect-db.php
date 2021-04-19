@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <?php
 // To find a hostname, access phpMyAdmin
 // - select tob "User accounts"

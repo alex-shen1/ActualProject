@@ -14,7 +14,14 @@
 
 
 <body>
-  <?php include 'common/login-session.php';?>
+  <?php session_start(); ?>
+
+  <?php
+  if (isset($_SESSION) && isset($_SESSION['pwd']) && isset($_SESSION['email'])) {
+      // header("Location: dashboard.php");
+      echo "<script>window.location = 'dashboard.php';</script>";
+  }
+  ?>
 
   <div class="overlay"></div>
 
@@ -110,11 +117,7 @@
               $_SESSION['email'] = $_POST['email'];
               $_SESSION['pwd'] = $_POST['password'];
               // header('Location: dashboard.php');
-              echo "
-                <script>
-                  window.location = 'dashboard.php';
-                </script>
-                ";
+              echo "<script>window.location = 'dashboard.php';</script>";
               echo 'Redirect failed';
           }
           // Disable login on 3 failed attempts
