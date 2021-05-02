@@ -14,8 +14,14 @@
 
 
 <body>
-  <!-- Built-in PHP session manager: https://www.php.net/manual/en/function.session-start.php -->
   <?php session_start(); ?>
+
+  <?php
+  if (isset($_SESSION) && isset($_SESSION['pwd']) && isset($_SESSION['email'])) {
+      // header("Location: dashboard.php");
+      echo "<script>window.location = 'dashboard.php';</script>";
+  }
+  ?>
 
   <div class="overlay"></div>
 
@@ -102,27 +108,34 @@
           // Check if field exists before access
           $email = htmlspecialchars($_POST['email']);
           $password = htmlspecialchars($_POST['password']);
+
+          foreach ($_POST as $k => $v)
+            echo "<br/> $k : $v";
+
           if (password_verify($password, $hash)) {
               // Set session variables
               $_SESSION['email'] = $_POST['email'];
               $_SESSION['pwd'] = $_POST['password'];
-              header('Location: dashboard.php');
+              // header('Location: dashboard.php');
+              echo "<script>window.location = 'dashboard.php';</script>";
+              echo 'Redirect failed';
           }
           // Disable login on 3 failed attempts
           else if (isset($_POST['attempt']) && $_POST['attempt'] >= 3) {
               echo '
-          <div class="my-5 w-100">
-              <div class="alert alert-danger" role="alert">
-              You have attempted to login 3 times unsuccessfully. We have locked your ability to log in.
-              </div>
-          </div>';
+                <div class="my-5 w-100">
+                    <div class="alert alert-danger" role="alert">
+                    You have attempted to login 3 times unsuccessfully. We have locked your ability to log in.
+                    </div>
+                </div>';
           }
           // Display message if password does not match
           else {
+              echo 'bad password';
               echo '
-          <div class="my-5 w-100">
-          <div class="alert alert-danger" role="alert">Email or password does not match our record.</div>
-          </div>';
+                <div class="my-5 w-100">
+                  <div class="alert alert-danger" role="alert">Email or password does not match our record.</div>
+                </div>';
           }
       }
 

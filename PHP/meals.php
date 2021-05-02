@@ -8,14 +8,16 @@
 <body>
   <?php require 'common/login-session.php';?>
 
+  <?php include 'common/navbar.php';?>
+
   <?php
   require('connect-db.php');  // connect to DB
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+      // DELETE action
       if (isset($_POST['id_to_delete'])) {
           global $db;
-          echo "TO DELETE: " . $_POST['id_to_delete'];
-          $query = "DELETE FROM meals
-              WHERE id = :id";
+
+          $query = "DELETE FROM meals WHERE id = :id";
           $statement = $db -> prepare($query);
           $statement -> bindValue(':id', $_POST['id_to_delete']);
           $statement -> execute();
@@ -23,24 +25,30 @@
           $results = $statement -> fetchAll();
 
           $statement -> closeCursor();
+
+          echo '<div class="alert alert-primary" role="alert">
+                  Meal deleted.
+                </div>';
       }
-      echo "TITLE: " . $_POST['meal_title'];
-      echo "<br>";
-      if ($_POST['meal_title'] == '') {
-          echo "MEAL TITLE EMPTY <br>";
-      } elseif ($_POST['ingredients'] == '') {
-          echo "INGREDIENTS EMPTY";
-      } else {
+      // CREATE action
+      elseif (isset($_POST['meal_title'], $_POST['num_servings'], $_POST['ingredients'], $_POST['instructions'])) {
           $meal_title = $_POST['meal_title'];
           $num_servings = $_POST['num_servings'];
           $ingredients = $_POST['ingredients'];
           $instructions = $_POST['instructions'];
-  //        $ingredients = str_replace("\n", "<br>", $_POST['ingredients']);
-  //        $instructions = str_replace("\n", "<br>", $_POST['instructions']);
+    //        $ingredients = str_replace("\n", "<br>", $_POST['ingredients']);
+    //        $instructions = str_replace("\n", "<br>", $_POST['instructions']);
           insertMeal($meal_title, $num_servings, $ingredients, $instructions);
-      }
 
-      echo str_replace("\n", "<br>", $_POST['instructions']);
+          echo '<div class="alert alert-primary" role="alert">
+                  Created meal for <strong>' . $_POST['meal_title'] . '</strong>.
+                </div>';
+      }
+      else {
+          echo '<div class="alert alert-danger" role="alert">
+                  DB Error: Fields missing.
+                </div>';
+      }
   }
 
   function insertMeal(string $meal_title, int $num_servings, string $ingredients, string $instructions)
@@ -72,30 +80,26 @@
 
       $statement->closeCursor();
 
-      echo "TYPE OF \$RESULTS: " . gettype($results);
-
       foreach ($results as $result) {
           echo '<div class="col-4">
-              <div class="card">
-                  <div class="card-body">
-                      <h5 class="card-title">' . $result['title'] . '</h5>
-                      <p class="card-text">Ingredients: ' . $result['ingredients'] . '</p>
-                      <form method="POST" action="meals.php">
-                      <input type="hidden" name="id_to_delete" value="' . $result['id'] . '" />
-                      <button type="submit" class="btn btn-primary bg-radish">
-                          <i class="fas fa-trash" aria-hidden="true"></i>
-                      </button>
-                      </form>
-                  </div>
-              </div>
-          </div>';
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">' . $result['title'] . '</h5>
+                            <p class="card-text">Ingredients: ' . $result['ingredients'] . '</p>
+                            <form method="POST" action="meals.php">
+                            <input type="hidden" name="id_to_delete" value="' . $result['id'] . '" />
+                            <button type="submit" class="btn btn-primary bg-radish">
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                            </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>';
 
   //        editMeal($result['title'],$result['num_servings'], $result['ingredients'], $result['instructions'], $result['id']);
       }
   }
 ?>
-
-<?php include 'common/navbar.php';?>
 
 <div id="content" class="container py-5">
     <div class="row py-4">
@@ -131,44 +135,14 @@
       </div>
     </div>
 
-    <?php echo "Filtering by" ?>
+    <?php echo "Displaying" ?>
     <span class="font-weight-bold">
       <?php if (isset($_GET['filteroptions'])) echo $_GET['filteroptions']; else echo "all" ?>
     </span>
+    <?php echo "saved recipes" ?>
 
     <div class="row py-4">
-                <?php getMeals(); ?>
-        <!--        <div class="col-4">-->
-        <!--            <div class="card">-->
-        <!--                <div class="card-body">-->
-        <!--                    <h5 class="card-title">Mac & Cheese</h5>-->
-        <!--                    <p class="card-text">Ingredients: Mac, Cheese, Butter, Milk</p>-->
-        <!--                    <a href="#" class="btn btn-primary bg-radish">-->
-        <!--                        <i class="fas fa-edit" aria-hidden="true"></i>-->
-        <!--                    </a>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--        <div class="col-4">-->
-        <!--            <div class="card">-->
-        <!--                <div class="card-body">-->
-        <!--                    <h5 class="card-title">Broccoli Stir-Fry</h5>-->
-        <!--                    <p class="card-text">Ingredients: Broccoli, Olive oil, Soy sauce</p>-->
-        <!--                    <a href="#" class="btn btn-primary bg-radish">-->
-        <!--                        <i class="fas fa-edit" aria-hidden="true"></i>-->
-        <!--                    </a>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--        <div class="col-4">-->
-        <!--            <div class="card">-->
-        <!--                <div class="card-body">-->
-        <!--                    <h5 class="card-title">Mashed Potatoes</h5>-->
-        <!--                    <p class="card-text">Ingredients: Potatoes, Butter, Milk</p>-->
-
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
+        <?php getMeals(); ?>
     </div>
     <div class="row">
         <div class="col d-flex justify-content-end">
@@ -191,13 +165,14 @@
             <div class="modal-body">
                 <form method="POST" action="./meals.php">
                     <div class="form-group">
-                        <label for="RecipeTitle">Recipe Title</label>
-                        <input type="text" class="form-control" id="RecipeTitle" placeholder="Recipe Title"
-                               name="meal_title">
+                        <label for="RecipeTitle" class="required-field">Recipe Title</label>
+                        <input type="text" class="form-control" id="RecipeTitle"
+                               placeholder="Recipe Title" name="meal_title" required>
                     </div>
                     <div class="form-group">
-                        <label for="NumServings">Number of servings</label>
-                        <select class="form-control" id="NumServings" name="num_servings">
+                        <label for="NumServings" class="required-field">Number of servings</label>
+                        <select class="form-control" id="NumServings"
+                                name="num_servings" required>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -206,12 +181,14 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="Ingredients">Ingredients</label>
-                        <textarea class="form-control" id="Ingredients" rows="3" name="ingredients"></textarea>
+                        <label for="Ingredients" class="required-field">Ingredients</label>
+                        <textarea class="form-control" id="Ingredients" rows="3"
+                                  name="ingredients" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="Recipe">Recipe Instructions</label>
-                        <textarea class="form-control" id="Recipe" rows="3" name="instructions"></textarea>
+                        <label for="Recipe" class="required-field">Recipe Instructions</label>
+                        <textarea class="form-control" id="Recipe" rows="3"
+                                  name="instructions" required></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -225,58 +202,6 @@
 
 <?php include 'common/footer.php';?>
 
-<!--SCRAPPED CODE-->
-<?php
-//function editMeal(string $meal_title, int $num_servings, string $ingredients, string $instructions, string $id)
-//{
-////<!-- Modal for creating new meals -->
-//    echo '<div class="modal fade" id="mealCreateModal' . $id . '" tabindex=" - 1" aria-labelledby="mealCreateLabel" aria-hidden="true">
-//    <div class="modal - dialog">
-//        <div class="modal - content">
-//            <div class="modal - header">
-//                <h5 class="modal - title" id="mealCreateLabel">Add a recipe</h5>
-//                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//                    <span aria-hidden="true">&times;</span>
-//                </button>
-//            </div>
-//            <div class="modal - body">
-//                <form method="POST" action=" ./meals . php">
-//                    <div class="form - group">
-//                        <label for="RecipeTitle">Recipe Title</label>
-//                        <input type="text" class="form - control" id="RecipeTitle" placeholder="Recipe Title" value="' . $meal_title . '"
-//                               name="meal_title">
-//                    </div>
-//                    <div class="form - group">
-//                        <label for="NumServings">Number of servings</label>
-//                        <select class="form - control" id="NumServings" name="num_servings" value="' . $num_servings . '">
-//                            <option>1</option>
-//                            <option>2</option>
-//                            <option>3</option>
-//                            <option>4</option>
-//                            <option>5</option>
-//                        </select>
-//                    </div>
-//                    <div class="form - group">
-//                        <label for="Ingredients">Ingredients</label>
-//                        <textarea class="form - control" id="Ingredients" rows="3" name="ingredients" value="' . $ingredients . '"></textarea>
-//                    </div>
-//                    <div class="form - group">
-//                        <label for="Recipe">Recipe Instructions</label>
-//                        <textarea class="form - control" id="Recipe" rows="3" name="instructions" value="' . $instructions . '"></textarea>
-//                    </div>
-//                    <div class="modal - footer">
-//                        <button type="button" class="btn btn - secondary" data-dismiss="modal">Cancel</button>
-//                        <button type="submit" class="btn btn - success">Save recipe</button>
-//                    </div>
-//                </form>
-//            </div>
-//        </div>
-//    </div>
-//</div>';
-//}
-
-//editMeal('', 1, '', '', '');
-?>
 
 <!-- Bootstrap core JavaScript -->
 <script
