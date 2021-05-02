@@ -1,1 +1,68 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*************COLORS VARS**************/
+
+/* Use these variables in CSS stylesheets */
+:root {
+--main-color: #f55e61ff;        /* Radish */
+--secondary-color: #f58f8f;     /* Coral */
+--background-color: #EBEBEB;    /* Light grey, used for backgrounds */
+
+}
+
+/*************DEFAULT STYLES**************/
+
+body {
+  /* Body text font: Open Sans */
+  font-family: 'Open Sans', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    color: WhiteSmoke;
+    padding: 10px;
+}
+
+/* For smaller text on small screens */
+@media (max-width: 900px) {
+  h1{ font-size: 32px; }
+  h2{ font-size: 26px; }
+  h3{ font-size: 22px; }
+  h4{ font-size: 20px; }
+  html{ font-size: 14px; }
+}
+
+/* Table styling */
+th {background: #EEE}
+tr:nth-child(even) {background: #EEE}
+tr:nth-child(odd) {background: #FFF}
+
+/*************COLOR CLASSES**************/
+/* Use these utility classes in HTML tag class styling  */
+
+/* Main color: Radish */
+.text-radish {
+color: var(--main-color);
+}
+.bg-radish {
+background-color: var(--main-color);
+}
+.border-radish {
+border-color: var(--main-color);
+}
+
+/* Secondary color: Coral */
+.text-coral {
+color: var(--secondary-color);
+}
+.bg-coral {
+background-color: var(--secondary-color);
+}
