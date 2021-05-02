@@ -38,9 +38,9 @@
           <a href="meals.php" class="btn btn-info btn-lg btn-block bg-coral">
             My meals
           </a>
-          <button type="button" class="btn btn-danger btn-lg btn-block bg-radish">
+          <a href="http://localhost:4200/" class="btn btn-danger btn-lg btn-block bg-radish">
             Plan meals
-          </button>
+          </a>
           <a href="shopping-list.php" class="btn btn-secondary btn-lg btn-block">
             View Shopping List
           </a>

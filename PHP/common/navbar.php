@@ -8,7 +8,7 @@
       <a class="nav-link active" href="index.php">Dashboard <span class="sr-only">(current)</span></a>
       <a class="nav-link" href="meals.php">Meals</a>
       <a class="nav-link" href="shopping-list.php">Shopping List</a>
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Planner (TBD)</a>
+      <a class="nav-link" href="http://localhost:4200/">Planner</a>
     </div>
     <div class="navbar-nav">
       <li class="nav-item dropdown">
