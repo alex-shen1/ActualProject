@@ -72,8 +72,9 @@
   function getMeals()
   {
       global $db; // Name needs to match connect-db.php
-      $query = "SELECT * FROM meals";
+      $query = "SELECT * FROM meals WHERE user_email = :user_email";
       $statement = $db->prepare($query);
+      $statement->bindValue(':user_email', $_SESSION['email']);
       $statement->execute();
 
       $results = $statement->fetchAll();

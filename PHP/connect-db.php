@@ -21,9 +21,9 @@ $hostname = 'localhost:3306';
 // database name
 $dbname = 'web4640';
 
-// database credentials
+// database credentials for GCP. Should this be hardcoded? No. Too bad!
 $username = 'web4640';
-$password = 'pwd4640';
+$password = 'password';
 
 $connectionName = 'webpl-project:us-east4:webpl-project';
 $socketDir = getenv('DB_SOCKET_DIR') ?: '/cloudsql';

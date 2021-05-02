@@ -114,8 +114,8 @@
 
           if (password_verify($password, $hash)) {
               // Set session variables
-              $_SESSION['email'] = $_POST['email'];
-              $_SESSION['pwd'] = $_POST['password'];
+              $_SESSION['email'] = $email;
+              $_SESSION['pwd'] = $password;
               // header('Location: dashboard.php');
               echo "<script>window.location = 'dashboard.php';</script>";
               echo 'Redirect failed';
