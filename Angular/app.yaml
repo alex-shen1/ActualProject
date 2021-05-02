@@ -1,0 +1,15 @@
+service: angular
+runtime: python27
+api_version: 1
+threadsafe: true
+
+skip_files:
+- ^(?!dist)  # Skip any files not in the dist folder
+
+handlers:
+- url: /
+  static_files: dist/FridginCool/index.html
+  upload: dist/FridginCool/index.html
+
+- url: /
+  static_dir: dist/FridginCool
