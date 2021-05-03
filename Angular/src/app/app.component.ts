@@ -12,6 +12,8 @@ export class AppComponent {
 
   session : string | undefined;
 
+  mealplan : any;
+
   week = [
    "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
   ];
@@ -34,7 +36,9 @@ export class AppComponent {
               console.log(response_json)
               const mealnames = response_json['mealnames'];
               this.meals = mealnames.replace(/(\r\n|\n|\r)/gm, "").split(",")
-              console.log(this.meals)
+              // console.log(this.meals)
+              this.mealplan = response_json['plan'];
+              console.log(this.mealplan)
             }, error => {
               console.log('ERROR: ', error);
             });

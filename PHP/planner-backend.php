@@ -54,16 +54,13 @@ if (isset($_SESSION['email'])) {
     $results = $statement->fetchAll();
     $statement->closeCursor();
 
-    $arranged_plan = [];
+    $arranged_plan = createEmptyPlan();
     foreach ($results as $entry){
         $day = $entry['day'];
         $mealtime = $entry['mealtime'];
         $meal_title = $entry['meal_title'];
 
-        if(!array_key_exists($day,$arranged_plan)){
-            $arranged_plan[$day] = array();
-        }
-        array_push($arranged_plan[$day],array("mealtime"=>$mealtime, "meal_title"=>$meal_title));
+        $arranged_plan[$day][$mealtime] = $meal_title;
     }
 //    echo print_r($arranged_plan);
 //    echo json_encode($arranged_plan);
@@ -73,6 +70,20 @@ if (isset($_SESSION['email'])) {
 
 
 //    echo $return_data->mealnames;
+}
+
+function createEmptyPlan(){
+    $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    $mealtimes = ['Breakfast', 'Lunch', 'Snack', 'Dinner'];
+    $plan = [];
+    foreach($days as $day){
+        $plan[$day] = array();
+        foreach($mealtimes as $mealtime){
+            $plan[$day][$mealtime] = 'None';
+        }
+    }
+
+    return $plan;
 }
 
 

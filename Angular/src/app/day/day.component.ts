@@ -9,8 +9,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DayComponent implements OnInit{
   @Input() dayOfWeek: any;
   @Input() meals : any;
+  @Input() mealplan : any;
+
 
   ngOnInit(): void {
-
+    console.log(this.mealplan);
   }
 }

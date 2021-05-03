@@ -6,7 +6,7 @@
     <h6 class="card-title text-danger">Breakfast</h6>
     <div class="input-group mb-3">
       <select class="custom-select" id="meal{{dayOfWeek}}1">
-        <option selected>None</option>
+        <option selected>{{mealplan[dayOfWeek]['Breakfast']}}</option>
         <option *ngFor="let meal of meals" value="meal">{{ meal }}</option>
       </select>
     </div>
@@ -14,7 +14,7 @@
     <h6 class="card-title text-danger">Lunch</h6>
     <div class="input-group mb-3">
       <select class="custom-select" id="meal{{dayOfWeek}}2">
-        <option selected>None</option>
+        <option selected>{{mealplan[dayOfWeek]['Lunch']}}</option>
         <option *ngFor="let meal of meals" value="meal">{{ meal }}</option>
       </select>
     </div>
@@ -22,7 +22,7 @@
     <h6 class="card-title text-danger">Snack</h6>
     <div class="input-group mb-3">
       <select class="custom-select" id="meal{{dayOfWeek}}3">
-        <option selected>None</option>
+        <option selected>{{mealplan[dayOfWeek]['Snack']}}</option>
         <option *ngFor="let meal of meals" value="meal">{{ meal }}</option>
       </select>
     </div>
@@ -30,7 +30,7 @@
     <h6 class="card-title text-danger">Dinner</h6>
     <div class="input-group mb-3">
       <select class="custom-select" id="meal{{dayOfWeek}}4">
-        <option selected>None</option>
+        <option selected>{{mealplan[dayOfWeek]['Dinner']}}</option>
         <option *ngFor="let meal of meals" value="meal">{{ meal }}</option>
       </select>
     </div>
