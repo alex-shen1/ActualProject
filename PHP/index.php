@@ -14,7 +14,8 @@
 
 
 <body>
-  <?php session_start(); ?>
+  <?php session_start();?>
+
 
   <?php
   if (isset($_SESSION) && isset($_SESSION['pwd']) && isset($_SESSION['email'])) {
