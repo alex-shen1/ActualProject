@@ -25,27 +25,54 @@ session_start();
 
 require('connect-db.php');
 if (isset($_SESSION['email'])) {
+    // will be converted into a JSON
+    $return_data = new stdClass();
+
     $email = $_SESSION['email'];
 
-    //echo "email is " . $email ;
     global $db; // Name needs to match connect-db.php
     $query = "SELECT * FROM meals WHERE user_email = :user_email";
-//    $query = "SELECT * FROM meals";//" WHERE user_email = :user_email";
     $statement = $db->prepare($query);
     $statement->bindValue(':user_email', $email);
     $statement->execute();
-
     $results = $statement->fetchAll();
-
     $statement->closeCursor();
 
+    // There's probably a better way to do this. Too bad!
     $meal_titles = [];
     foreach ($results as $result) {
         array_push($meal_titles, $result['title']);
     }
+    // Combine all titles into comma-separated string
+    $return_data->mealnames = implode(',', $meal_titles);
 
-// combines all titles into comma-separated string
-    echo implode(',', $meal_titles);
+    //---------------------- SCHEDULED MEALS ----------------------
+    $query = "SELECT * FROM scheduled_meals WHERE user_email = :user_email";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':user_email', $email);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+
+    $arranged_plan = [];
+    foreach ($results as $entry){
+        $day = $entry['day'];
+        $mealtime = $entry['mealtime'];
+        $meal_title = $entry['meal_title'];
+
+        if(!array_key_exists($day,$arranged_plan)){
+            $arranged_plan[$day] = array();
+        }
+        array_push($arranged_plan[$day],array("mealtime"=>$mealtime, "meal_title"=>$meal_title));
+    }
+//    echo print_r($arranged_plan);
+//    echo json_encode($arranged_plan);
+    $return_data->plan = $arranged_plan;
+
+    echo json_encode($return_data);
+
+
+//    echo $return_data->mealnames;
 }
 
 

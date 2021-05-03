@@ -29,8 +29,11 @@ export class AppComponent {
           this.http.post('http://localhost/FridginCool/PHP/planner-backend.php',
             body, {responseType: "text"})
             .subscribe(response => {
-              console.log(response);
-              this.meals = response.replace(/(\r\n|\n|\r)/gm, "").split(",")
+              // console.log(response);
+              const response_json = JSON.parse(response);
+              console.log(response_json)
+              const mealnames = response_json['mealnames'];
+              this.meals = mealnames.replace(/(\r\n|\n|\r)/gm, "").split(",")
               console.log(this.meals)
             }, error => {
               console.log('ERROR: ', error);
