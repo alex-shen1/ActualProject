@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-header text-center text-white bg-danger">
+    {{ dayOfWeek | uppercase }}
+  </div>
+  <div class="card-body">
+    <h6 class="card-title text-danger">Breakfast</h6>
+    <div class="input-group mb-3">
+      <select class="custom-select" id="meal{{dayOfWeek}}1">
+        <option selected>None</option>
+        <option *ngFor="let meal of meals" value="meal">{{ meal }}</option>
+      </select>
+    </div>
+
+    <h6 class="card-title text-danger">Lunch</h6>
+    <div class="input-group mb-3">
+      <select class="custom-select" id="meal{{dayOfWeek}}2">
+        <option selected>None</option>
+        <option *ngFor="let meal of meals" value="meal">{{ meal }}</option>
+      </select>
+    </div>
+
+    <h6 class="card-title text-danger">Snack</h6>
+    <div class="input-group mb-3">
+      <select class="custom-select" id="meal{{dayOfWeek}}3">
+        <option selected>None</option>
+        <option *ngFor="let meal of meals" value="meal">{{ meal }}</option>
+      </select>
+    </div>
+
+    <h6 class="card-title text-danger">Dinner</h6>
+    <div class="input-group mb-3">
+      <select class="custom-select" id="meal{{dayOfWeek}}4">
+        <option selected>None</option>
+        <option *ngFor="let meal of meals" value="meal">{{ meal }}</option>
+      </select>
+    </div>
+
+  </div>
+</div>
