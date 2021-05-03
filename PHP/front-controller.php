@@ -1,8 +1,13 @@
-<?php session_start(); ?>
-
-<!-- Note: This is neccessary for GCP -->
 <?php
-//echo @parse_url($_SERVER['REQUEST_URI'])['path'];
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT');
+
+session_start();
+
+// front controller necessary for GCP
+
 switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/':                   // URL (without file name) to a default screen
         require './index.php';
@@ -25,7 +30,7 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/shopping-list.php':
         require './shopping-list.php';
         break;
-    case '/planner-backend':
+    case '/planner-backend.php':
         require './planner-backend.php';
         break;
     default:

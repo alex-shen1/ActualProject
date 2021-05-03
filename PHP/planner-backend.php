@@ -1,8 +1,8 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding');
-header('Access-Control-Max-Age: 1000');
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT');
+//header('Access-Control-Allow-Origin: *');
+//header('Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding');
+//header('Access-Control-Max-Age: 1000');
+//header('Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT');
 
 $json = file_get_contents('php://input');
 
@@ -20,6 +20,7 @@ $session = $data[0];
 //echo $email;
 //echo $session;
 
+session_write_close();
 session_id($session);
 session_start();
 
@@ -67,7 +68,6 @@ if (isset($_SESSION['email'])) {
     $return_data->plan = $arranged_plan;
 
     echo json_encode($return_data);
-
 
 //    echo $return_data->mealnames;
 }
