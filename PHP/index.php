@@ -20,7 +20,7 @@
   <?php
   if (isset($_SESSION) && isset($_SESSION['pwd']) && isset($_SESSION['email'])) {
       // header("Location: dashboard.php");
-      echo "<script>window.location = 'dashboard.php';</script>";
+      echo "<script>window.location = 'dashboard.html';</script>";
   }
   ?>
 
@@ -118,7 +118,7 @@
               $_SESSION['email'] = $email;
               $_SESSION['pwd'] = $password;
               // header('Location: dashboard.php');
-              echo "<script>window.location = 'dashboard.php';</script>";
+              echo "<script>window.location = 'dashboard.html';</script>";
               echo 'Redirect failed';
           }
           // Disable login on 3 failed attempts

@@ -1,0 +1,20 @@
+<div id="page">
+
+</div>
+
+<script>
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = setPage;
+
+    xhr.open("GET", 'dashboard.php', true);
+    xhr.send();
+
+    function setPage(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            //update DOM
+            document.getElementById("page").innerHTML = xhr.responseText;
+        }
+        console.log(xhr.responseText);
+    }
+
+</script>

@@ -23,6 +23,8 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
         break;
     case '/dashboard.php':
         require './dashboard.php';
+    case '/dashboard.html':
+        require './dashboard.html';
         break;
     case '/meals.php':
         require './meals.php';
