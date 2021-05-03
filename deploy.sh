@@ -1,5 +1,5 @@
 cd Angular
 ng build --prod
-gcloud app deploy
+gcloud app deploy --quiet
 cd ../PHP
-gcloud app deploy
+gcloud app deploy --quiet
