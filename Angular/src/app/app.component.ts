@@ -44,7 +44,7 @@ export class AppComponent {
               const mealnames = response_json['mealnames'];
               // comma-separated string with meal names
               this.meals = mealnames.replace(/(\r\n|\n|\r)/gm, "").split(",")
-              // console.log(this.meals)
+              console.log(this.meals)
 
               // meal plan data structure
               this.mealplan = response_json['plan'];

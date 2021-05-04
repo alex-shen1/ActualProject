@@ -2,9 +2,16 @@
 
 <app-navbar></app-navbar>
 
-<div id="content" class="container py-5">
+<div id="content" class="container py-5 px-0">
   <h2 id="pageHeader">My Meal Planner</h2>
-  <div class="row py-4">
+  <div *ngIf="!meals || meals.length == 1">
+    You haven't saved any recipes yet.
+    <a href="http://localhost/FridginCool/PHP/meals.php?session={{session}}">Add a meal</a>
+  </div>
+  <div *ngIf="!mealplan">
+    You haven't planned any meals yet. Select one of your saved meals!
+  </div>
+  <div class="row py-4 px-3">
     <div class="col px-0" *ngFor="let day of week">
       <app-day [dayOfWeek]="day" [meals]="meals" [mealplan]="mealplan" [sessionID]="session"></app-day>
     </div>
