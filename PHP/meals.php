@@ -38,7 +38,7 @@
           $instructions = $_POST['instructions'];
     //        $ingredients = str_replace("\n", "<br>", $_POST['ingredients']);
     //        $instructions = str_replace("\n", "<br>", $_POST['instructions']);
-          insertMeal($meal_title, $num_servings, $ingredients, $instructions);
+          insertMeal($meal_title, $num_servings, $ingredients, $instructions, $_SESSION['email']);
 
           echo '<div class="alert alert-primary" role="alert">
                   Created meal for <strong>' . $_POST['meal_title'] . '</strong>.
@@ -51,7 +51,7 @@
       }
   }
 
-  function insertMeal(string $meal_title, int $num_servings, string $ingredients, string $instructions)
+  function insertMeal(string $meal_title, int $num_servings, string $ingredients, string $instructions, string $email)
   {
       global $db;
 
@@ -63,7 +63,7 @@
       $statement->bindValue(':num_servings', $num_servings);
       $statement->bindValue(':ingredients', $ingredients);
       $statement->bindValue(':instructions', $instructions);
-      $statement->bindValue(':user_email', 'root@test.com');
+      $statement->bindValue(':user_email', $email);
       $statement->execute();
 
       $statement->closeCursor();

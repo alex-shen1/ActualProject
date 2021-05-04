@@ -38,7 +38,7 @@
           <a href="meals.php" class="btn btn-info btn-lg btn-block bg-coral">
             My meals
           </a>
-          <a href="http://localhost:4200/" class="btn btn-danger btn-lg btn-block bg-radish">
+          <a href="http://localhost:4200?session=<?php echo session_id()?>" class="btn btn-danger btn-lg btn-block bg-radish">
             Plan meals
           </a>
           <a href="shopping-list.php" class="btn btn-secondary btn-lg btn-block">

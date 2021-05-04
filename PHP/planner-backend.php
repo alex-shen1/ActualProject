@@ -17,9 +17,6 @@ foreach ($postdata as $field) {
 //$email = $data[0];
 $session = $data[0];
 
-//echo $email;
-//echo $session;
-
 session_write_close();
 session_id($session);
 session_start();
