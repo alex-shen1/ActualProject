@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 
 @Component({
@@ -12,6 +13,8 @@ export class DayComponent implements OnInit{
   @Input() mealplan : any;
   @Input() sessionID : any;
 
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit(): void {
     console.log(this.mealplan);
