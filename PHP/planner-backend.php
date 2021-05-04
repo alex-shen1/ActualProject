@@ -42,7 +42,13 @@ if (isset($_SESSION['email'])) {
         array_push($meal_titles, $result['title']);
     }
     // Combine all titles into comma-separated string
-    $return_data->mealnames = "--," . implode(',', $meal_titles);
+    $mealnames = implode(',', $meal_titles);
+    if($mealnames === ""){
+        $return_data->mealnames = "--";
+    }
+    else{
+        $return_data->mealnames = "--," . mealnames;
+    }
 
     //---------------------- SCHEDULED MEALS ----------------------
     $query = "SELECT * FROM scheduled_meals WHERE user_email = :user_email";

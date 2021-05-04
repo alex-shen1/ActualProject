@@ -42,15 +42,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $statement->execute();
         $statement->closeCursor();
 
-        $query = "INSERT INTO scheduled_meals VALUES (:user_email, :day, :mealtime, :meal_title)";
-        $statement = $db->prepare($query);
-        $statement->bindValue(':user_email', $email);
-        $statement->bindValue(':day', $day);
-        $statement->bindValue(':mealtime', $mealtime);
-        $statement->bindValue(':meal_title', $meal_name);
-        $statement->execute();
-        $statement->closeCursor();
-        echo "Value inserted";
+        if($meal_name !== "--") {
+            $query = "INSERT INTO scheduled_meals VALUES (:user_email, :day, :mealtime, :meal_title)";
+            $statement = $db->prepare($query);
+            $statement->bindValue(':user_email', $email);
+            $statement->bindValue(':day', $day);
+            $statement->bindValue(':mealtime', $mealtime);
+            $statement->bindValue(':meal_title', $meal_name);
+            $statement->execute();
+            $statement->closeCursor();
+            echo "Value inserted";
+        }
+        else{
+            echo "Meal deleted";
+        }
     }
 //}
 }
