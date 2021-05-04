@@ -47,7 +47,7 @@ if (isset($_SESSION['email'])) {
         $return_data->mealnames = "--";
     }
     else{
-        $return_data->mealnames = "--," . mealnames;
+        $return_data->mealnames = "--," . $mealnames;
     }
 
     //---------------------- SCHEDULED MEALS ----------------------
