@@ -42,7 +42,7 @@ if (isset($_SESSION['email'])) {
         array_push($meal_titles, $result['title']);
     }
     // Combine all titles into comma-separated string
-    $return_data->mealnames = implode(',', $meal_titles);
+    $return_data->mealnames = "--," . implode(',', $meal_titles);
 
     //---------------------- SCHEDULED MEALS ----------------------
     $query = "SELECT * FROM scheduled_meals WHERE user_email = :user_email";
@@ -76,7 +76,7 @@ function createEmptyPlan(){
     foreach($days as $day){
         $plan[$day] = array();
         foreach($mealtimes as $mealtime){
-            $plan[$day][$mealtime] = 'None';
+            $plan[$day][$mealtime] = '--';
         }
     }
 
